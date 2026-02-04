@@ -82,3 +82,43 @@
 
 ## 更新時間
 最後更新: 2024-02-04 20:40 PST
+
+---
+
+## 2026-02-04 (續)
+
+**20:45** - 新增即時語音通話應用方案
+- 使用 BlackHole 虛擬音源線
+- 可將 AI 語音即時傳送到 Signal/Discord 通話
+
+---
+
+## TODO List: BlackHole 語音通話設定
+
+### 第一步：安裝軟體
+- [ ] 安裝 BlackHole 2ch (`brew install blackhole-2ch`)
+- [ ] 安裝 IINA 播放器 (`brew install iina`)
+- [ ] 重啟 Mac (如果看不到 BlackHole)
+
+### 第二步：設定多重輸出裝置
+- [ ] 打開「音訊 MIDI 設定」(Command + Space 搜尋 MIDI)
+- [ ] 點擊左下角「+」→「建立多重輸出裝置」
+- [ ] 勾選 BlackHole 2ch + 耳機/揚聲器
+- [ ] (選做) 建立「聚集裝置」= 麥克風 + BlackHole
+
+### 第三步：設定播放器
+- [ ] 打開 IINA → 偏好設定 → 音訊
+- [ ] 音訊裝置選擇「多重輸出裝置」
+
+### 第四步：設定 Discord/Signal
+- [ ] Discord: 設定 → 語音與視訊 → 輸入裝置 → BlackHole 2ch
+- [ ] Discord: 關閉 Krisp 雜訊抑制、回音消除
+- [ ] Signal: 設定 → 通話 → 麥克風 → BlackHole 2ch
+
+### 第五步：測試
+- [ ] 用 ElevenLabs 生成測試音檔
+- [ ] 找家人/朋友在隔壁房間測試
+- [ ] 確認對方能聽到清晰的 AI 聲音
+
+### 進階 (選做)
+- [ ] 設定聚集裝置，實現「人聲 + AI 聲」同時輸入
