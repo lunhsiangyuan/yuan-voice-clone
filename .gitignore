@@ -1,0 +1,9 @@
+# Large audio files (use Git LFS or upload directly to ElevenLabs)
+*.mp3
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
