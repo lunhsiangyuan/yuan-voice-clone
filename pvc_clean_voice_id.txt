@@ -1,0 +1,4 @@
+ELEVENLABS_PVC_VOICE_ID=6ksMfqyR3w7UcA4bkv1N
+VOICE_NAME=袁倫祥醫師_Clean
+STATUS=pending_verification
+AUDIO_SOURCE=台灣癌症基金會專訪_攝護腺癌大解惑

@@ -1,0 +1,3 @@
+ELEVENLABS_PVC_VOICE_ID=xTLahHZjXRiVfC7OiDF5
+VOICE_NAME=袁倫祥醫師_PVC
+STATUS=pending_verification
