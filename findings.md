@@ -170,3 +170,30 @@ AI 生成音檔 → BlackHole (虛擬麥克風) → Signal/Discord → 朋友聽
 2. 用 Signal/Discord 撥打電話
 3. 用 IINA/VLC 播放音檔 (輸出設為多重輸出裝置)
 4. 朋友聽到 AI 聲音
+
+---
+
+## ElevenLabs API 設定
+
+### API Key
+- **Key Name**: Allen
+- **Key ID**: 結尾 `•0117`
+- **儲存位置**: `~/.zshrc` (ELEVENLABS_API_KEY)
+
+### 最佳語音參數
+針對穩定、清晰的語音輸出：
+```python
+voice_settings={
+    "stability": 0.95,        # 高穩定度，減少變化
+    "similarity_boost": 0.90, # 高相似度
+    "style": 0.0,             # 無風格誇張
+    "use_speaker_boost": True # 開啟講者增強
+}
+```
+
+### 快速生成語音指令
+```bash
+cd ~/Projects/yuan-voice-clone
+python3 generate_test.py
+open -a IINA test_voice.mp3
+```

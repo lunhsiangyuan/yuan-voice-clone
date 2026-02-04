@@ -10,63 +10,86 @@
 │  ElevenLabs IVC     [##########] 100% ✅ 完成               │
 │  ElevenLabs PVC     [######----]  60% ⏳ 待驗證             │
 │  GPT-SoVITS 安裝    [##########] 100% ✅ 完成               │
-│  GPT-SoVITS 訓練    [####------]  40% 🔄 資料已準備         │
+│  訓練資料準備       [##########] 100% ✅ 完成               │
+│  Colab 訓練環境     [##########] 100% ✅ 完成               │
 │  聲音分離           [----------]   0% 📋 待執行             │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## 服務狀態
+## Colab 訓練準備
 
-| 服務 | 狀態 | 端口 | PID |
-|------|------|------|-----|
-| GPT-SoVITS WebUI | ✅ 運行中 | 9876 | 74458 |
-| ElevenLabs API | ✅ 可用 | - | - |
+| 項目 | 狀態 | 說明 |
+|------|------|------|
+| 訓練資料 ZIP | ✅ | yuan_training_data.zip (18MB) |
+| 標註文件 | ✅ | 252 片段，已校正 ASR 錯誤 |
+| 訓練指南 | ✅ | COLAB_TRAINING.md |
+| Colab Notebook | ✅ | colab_training.ipynb |
 
-## GPT-SoVITS 訓練資料
+## 開始訓練
 
-```
-gpt-sovits-training/
-├── audio/                    # 252 個 WAV 片段
-├── transcript.list           # 原始標註
-├── transcript_corrected.list # 校正後標註 ✅
-└── README.md                 # 訓練說明
-```
+1. 開啟: https://colab.research.google.com/github/RVC-Boss/GPT-SoVITS/blob/main/Colab-WebUI.ipynb
+2. 上傳: gpt-sovits-training/yuan_training_data.zip
+3. 依照 COLAB_TRAINING.md 步驟操作
 
-**統計:**
-- 總片段數: 252
-- 總文字數: 3,284 字
-- 平均每片段: 13 字
-- 音檔格式: WAV 16kHz 單聲道
+## Git Commits
 
-## Session Log
-
-### 2024-02-04 Session 1 (earlier)
-- 建立 ElevenLabs IVC/PVC 聲音模型
-- 分離台灣癌症基金會音檔
-
-### 2024-02-04 Session 2 (current)
-- ✅ 新增 TTS 方案選擇指南
-- ✅ GPT-SoVITS 完整安裝
-- ✅ 訓練資料準備
-  - Whisper ASR 轉錄
-  - 分割 252 個音檔片段
-  - 醫學術語校正
-
-## Voice IDs
-
-| 平台 | 模型類型 | Voice ID | 狀態 |
-|------|---------|----------|------|
-| ElevenLabs | IVC | Z1EU1IiJ7plOOioojpGN | ✅ 可用 |
-| ElevenLabs | PVC Clean | 6ksMfqyR3w7UcA4bkv1N | ⏳ 待驗證 |
-| GPT-SoVITS | 待訓練 | - | 📋 資料已準備 |
-
-## 下一步待辦
-
-1. [ ] 完成 ElevenLabs PVC 聲音驗證
-2. [ ] Google Colab 訓練 GPT-SoVITS 模型
-3. [ ] 分離雲林之聲音檔
-4. [ ] 本地 GPT-SoVITS 推理測試
+| Commit | 說明 |
+|--------|------|
+| 5828a37 | Colab 訓練環境設置 |
+| ffd6c15 | 訓練資料準備 |
+| 1b8d24e | GPT-SoVITS 安裝完成 |
+| 47a2bb1 | TTS 方案選擇指南 |
 
 ## 更新時間
-最後更新: 2024-02-04 22:10 PST
+最後更新: 2024-02-04 22:35 PST
+
+---
+
+## 2026-02-04 (Session 2)
+
+**22:00** - BlackHole 語音通話設定
+
+### 已完成安裝
+- [x] BlackHole 2ch (`brew install blackhole-2ch`)
+- [x] IINA 播放器 (`brew install iina`)
+- [x] Discord (`brew install --cask discord`)
+- [x] switchaudio-osx (音訊切換工具)
+- [x] Mac Mini 重啟完成
+
+### 已完成設定
+- [x] Audio MIDI Setup - 多重輸出裝置
+- [x] IINA 音訊輸出設定
+- [x] Discord 輸入裝置 → BlackHole 2ch
+- [x] ElevenLabs API Key 加入 ~/.zshrc
+
+### 測試音檔已生成
+- `test_voice.mp3` - 中文測試 (高穩定度)
+- `test_voice_english.mp3` - 英文測試
+
+### 語音參數設定
+```
+stability: 0.95
+similarity_boost: 0.90
+style: 0.0
+use_speaker_boost: True
+```
+
+### 待測試
+- [ ] Discord Let's Check 功能驗證
+- [ ] 實際 Discord 通話測試
+- [ ] Signal 通話測試
+
+---
+
+## 專案完成狀態
+
+### Voice Clone
+- ✅ PVC 已建立: `袁倫祥醫師_Clean`
+- ✅ Voice ID: `6ksMfqyR3w7UcA4bkv1N`
+- ✅ API Key 已設定
+
+### BlackHole 語音路由
+- ✅ 軟體安裝完成
+- ✅ 音訊路由設定完成
+- ⏳ 待實際通話測試
