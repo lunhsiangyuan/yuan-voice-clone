@@ -9,6 +9,11 @@ ElevenLabs Voice Models:
 - IVC (Instant Clone): 完成 - Voice ID: Z1EU1IiJ7plOOioojpGN
 - PVC (Professional): 待驗證 - Voice ID: 6ksMfqyR3w7UcA4bkv1N
 
+GPT-SoVITS:
+- 安裝狀態: 完成
+- WebUI 端口: 9876
+- 設備: CPU (Mac Mini M4 Pro)
+
 ## 音檔資源
 
 | 來源 | 狀態 | 品質 |
@@ -26,33 +31,34 @@ ElevenLabs Voice Models:
 - [ ] 測試 PVC 輸出品質
 
 ### Phase 2: 聲音分離 (雲林之聲) - pending
-- [ ] 安裝 pyannote-audio 或 Demucs
 - [ ] 分離 新雲林之聲_1090703 音檔
 - [ ] 分離 新雲林之聲_攝護腺常見疾病 音檔
 - [ ] 驗證分離品質
-- [ ] 補充上傳至 PVC (若需要更多音檔)
 
-### Phase 3: GPT-SoVITS 本地設置 - pending
-- [ ] 安裝 GPT-SoVITS
+### Phase 3: GPT-SoVITS 本地設置 - complete
+- [x] 安裝 GPT-SoVITS
+- [x] 下載預訓練模型
+- [x] WebUI 啟動成功 (port 9876)
 - [ ] 準備訓練資料格式
-- [ ] 本地訓練聲音模型
-- [ ] 斷網運行測試
+- [ ] 本地訓練聲音模型 (需雲端 GPU)
+- [ ] 推理測試
 
 ### Phase 4: TTS 整合應用 - pending
 - [ ] Edge-TTS 腳本 (衛教/迷因)
 - [ ] GPT-SoVITS 推理腳本
 - [ ] 自動化工作流程
 
-## 已知問題
+## 重要發現
 
-| 問題 | 狀態 | 解決方案 |
-|------|------|---------|
-| IVC 中文口音不自然 | 已識別 | 使用 PVC 替代 |
-| 雲林之聲有主持人聲音 | 待處理 | 需要語音分離 |
-| PVC 驗證失敗 | 已修正 | 改用乾淨音檔重建 |
+GPT-SoVITS Mac 限制:
+- MPS (Apple GPU) 不支援
+- 訓練需要 NVIDIA GPU (建議用 Google Colab)
+- 推理可用 CPU 運行
 
 ## 更新記錄
 
+- 2024-02-04 20:35: GPT-SoVITS WebUI 啟動成功
+- 2024-02-04 20:23: 預訓練模型下載完成
+- 2024-02-04 20:18: GPT-SoVITS 安裝開始
 - 2024-02-04 20:15: 建立規劃文件
 - 2024-02-04 20:14: 新增 TTS 方案選擇指南
-- 2024-02-04 20:09: 建立 Clean PVC

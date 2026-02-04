@@ -50,3 +50,46 @@
 ## 更新記錄
 
 - 2024-02-04: 初始發現整理
+
+## GPT-SoVITS Mac 安裝發現
+
+### 硬體規格
+- Mac Mini M4 Pro + 64GB RAM
+- 可運行 CPU 推理
+
+### MPS 支援狀態
+- ❌ 訓練: 不支援 Apple Silicon MPS
+- ✅ 推理: 可用 CPU 運行
+- 建議: 雲端 GPU 訓練 + 本地推理
+
+### 安裝依賴
+```
+torch numpy scipy tensorboard librosa==0.9.2 numba==0.56.4
+pytorch-lightning ffmpeg-python onnxruntime tqdm
+cn2an pypinyin g2p_en chardet gradio transformers
+psutil wordsegment jieba langdetect pyopenjtalk jaconv
+opencc opencc-python-reimplemented
+```
+
+### 預訓練模型
+- 來源: huggingface.co/lj1995/GPT-SoVITS
+- 大小: ~2GB
+- 包含: HuBERT, RoBERTa, HiFiGAN, SoVITS pretrained
+
+### WebUI 配置
+- 端口: 9876 (修改自原始 9874)
+- 配置文件: config.py
+
+### 工作流程
+```
+訓練 (雲端 GPU)           推理 (本地 CPU)
+        │                        │
+        ▼                        ▼
+┌─────────────┐          ┌─────────────┐
+│ Google Colab │────────▶│  Mac Mini   │
+│ (訓練模型)   │ 下載模型 │ (WebUI推理) │
+└─────────────┘          └─────────────┘
+```
+
+### 更新
+- 2024-02-04: GPT-SoVITS 安裝完成
