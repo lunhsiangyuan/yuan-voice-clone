@@ -93,3 +93,35 @@ opencc opencc-python-reimplemented
 
 ### 更新
 - 2024-02-04: GPT-SoVITS 安裝完成
+
+---
+
+## 當前使用的 Voice Clone
+
+### 袁倫祥醫師 PVC (推薦使用)
+- **Voice ID**: `6ksMfqyR3w7UcA4bkv1N`
+- **名稱**: 袁倫祥醫師_Clean
+- **類型**: Professional Voice Clone (PVC)
+- **狀態**: ✅ 可使用（fine-tuning 進行中，品質已達可用標準）
+- **訓練資料**: 台灣癌症基金會專訪 (17 分鐘，乾淨單一講者)
+- **語言**: Chinese (Mandarin Taiwan)
+- **建議模型**: eleven_multilingual_v2
+
+### API 使用範例
+```python
+from elevenlabs import ElevenLabs
+
+client = ElevenLabs(api_key="YOUR_API_KEY")
+
+audio = client.text_to_speech.convert(
+    voice_id="6ksMfqyR3w7UcA4bkv1N",
+    text="您的文字內容",
+    model_id="eleven_multilingual_v2"
+)
+```
+
+### 建議參數設定
+- **Stability**: 0.7-0.8 (較穩定)
+- **Similarity**: 0.8-0.9 (高相似度)
+- **Style Exaggeration**: 0 (無誇張)
+- **Speaker Boost**: ON
