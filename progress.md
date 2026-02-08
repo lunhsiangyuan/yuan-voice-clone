@@ -93,3 +93,55 @@ use_speaker_boost: True
 - ✅ 軟體安裝完成
 - ✅ 音訊路由設定完成
 - ⏳ 待實際通話測試
+
+---
+
+## 2026-02-08
+
+### Git 整理
+- [x] 更新 .gitignore（排除 GPT-SoVITS/、models/、*.wav、*.ckpt 等）
+- [x] 腳本重新組織至 scripts/{inference,training,setup}/
+- [x] git filter-repo 清理 wav 歷史（.git 36MB → 18MB）
+- [x] Force push 到 GitHub
+
+### Kaggle 訓練模型
+- [x] GPT yuan-e20.ckpt (20 epochs, Kaggle T4 GPU) — 已下載至 models/
+- [x] SoVITS yuan_e10_s630.pth (10 epochs) — 音色正常
+- [x] API 已切換至 e20 模型（tts_infer.yaml）
+
+### 語音合成測試
+- [x] 新年問好音檔（GPT-SoVITS, e5）
+- [x] 衛教音檔（ElevenLabs + GPT-SoVITS 對比）
+- [x] e20 模型衛教測試
+
+### 已知問題 — 尾音截斷 (Tail Truncation)
+**狀態**: 🔴 未解決
+
+**症狀**: 每句話最後一個字的能量急速衰減，聽起來被切成一半
+
+**根因**: T2S (GPT) 模型 EOS token 偵測不穩定，導致最後幾個 semantic token 品質下降。這是 GPT-SoVITS 架構性問題，e5/e20 都存在。
+
+**已嘗試的方法**:
+| 方法 | 結果 |
+|------|------|
+| 短填充詞「嗯。」 | 部分改善，但不穩定 |
+| 長犧牲句 + cut5 分割 | e20 模型下產生重複 |
+| 無修剪直接輸出 | 尾音仍然衰減 |
+| 「嗯好。」+ 回切 450ms | 切得不精確，仍有截斷 |
+
+**下一步 TODO**:
+- [ ] 嘗試更長的填充句（如「，好的，謝謝大家。」）+ 動態切割
+- [ ] 嘗試 GPT-SoVITS v3/v4 模型架構（可能已修復此問題）
+- [ ] 嘗試不同 reference audio 看是否影響 EOS 行為
+- [ ] 研究 GPT-SoVITS GitHub Issues 是否有官方修復
+- [ ] 考慮只重訓 GPT 更多 epochs（30-50）看是否改善
+- [ ] 考慮混合方案：GPT-SoVITS 出稿 + 手動後製尾音
+
+### 模型設定（目前生效）
+```yaml
+# tts_infer.yaml (GPT-SoVITS/GPT_SoVITS/configs/)
+t2s_weights_path: GPT_weights/yuan/yuan-e20.ckpt  # Kaggle 20 epochs
+vits_weights_path: SoVITS_weights/yuan/yuan_e10_s630.pth
+device: mps
+version: v2
+```
